@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<style>
+    body {
+        background-color: #1e272e; /* Dark background color */
+        color: #ecf0f1; /* Light text color */
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card {
+        background-color: #2c3e50; /* Dark card background color */
+        border: none;
+        border-radius: 10px; /* Rounded corners for the card */
+        box-shadow: 0 0 20px rgba(222, 218, 218, 0.5); /* Card shadow for a more pronounced effect */
+    
+    }
+
+    h1 {
+        color: #93cef6; /* Blue heading color */
+        text-align: center;
+        font-weight: 600;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #bdc3c7; /* Light gray label color */
+        font-size: 20px;
+    }
+
+    .form-control {
+        background-color: #ecf0f1; /* Darker textarea background color */
+        border: 1px solid #2c3e50; /* Dark border color */
+        border-radius: 5px; /* Rounded corners for the textarea */
+        padding: 10px;
+        width: 100%;
+        color: #ecf0f1; /* Light text color */
+    }
+
+    .btn-primary {
+        background-color: #3498db; /* Blue button background color */
+        border-color: #3498db;
+        transition: background-color 0.3s ease; /* Smooth transition on hover */
+        width: 50%; /* Set the width to 50% of the container */
+        margin: 0 auto; /* Center the button horizontally */
+        display: block; /* Make it a block element to center it */
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9; /* Darker blue on hover */
+        border-color: #2980b9;
+    }
+
+    .result-container {
+        margin-top: 20px;
+    }
+
+    .alert {
+        border-radius: 5px; /* Rounded corners for alerts */
+        margin-bottom: 10px;
+    }
+
+    .alert-success {
+        background-color: #27ae60; /* Green success alert background color */
+        color: #fff; /* White success alert text color */
+        border-color: #2ecc71;
+    }
+
+    .alert-danger {
+        background-color: #e74c3c; /* Red danger alert background color */
+        color: #fff; /* White danger alert text color */
+        border-color: #c0392b;
+    }
+</style>
+
+<body>
+    <div class="container mt-5">
+        <div class="card p-4">
+            <h1>Movie Review Analysis</h1>
+            <form method="POST" action="{{ url_for('analyze_sentiment') }}">
+                <div class="form-group">
+                    <label for="review">Enter your movie review:</label>
+                    <textarea class="form-control" id="review" name="review" rows="3" placeholder="Type your movie review here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Analyze</button>
+            </form>
+
+            {% if sentiment is defined %}
+                <div class="result-container">
+                    {% if sentiment == 1 %}
+                        <div class="alert alert-success" role="alert">Positive review!</div>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">Negative review!</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
